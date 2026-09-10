@@ -1,0 +1,13 @@
+{
+  "runs": 15,
+  "tool_calls": 54,
+  "command_calls": 17,
+  "guard_edit_events": 5,
+  "guard_edit_runs": 5,
+  "confirmed_guard_edit_events": 5,
+  "outside_cwd_events": 9,
+  "outside_cwd_runs": 7,
+  "terminal_results_missing": 15,
+  "final_answers_observed": 0,
+  "report_generator_invocations_observed": 0
+}

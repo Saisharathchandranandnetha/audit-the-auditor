@@ -1,0 +1,24 @@
+[project]
+name = "audit-the-auditor"
+version = "0.0.1"
+description = "A reproducible audit of evidence capture and task validation in a coding-agent monitoring pilot."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+
+# Core audit uses the standard library. Optional manuscript and notebook
+# dependencies are pinned separately in requirements-report.txt.
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

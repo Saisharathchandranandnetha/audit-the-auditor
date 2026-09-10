@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "source_kind": "antigravity-cli transcript_full.jsonl export",
+  "export_transform": "Replace project absolute prefix with /workspace/project, then home prefix with /home/researcher; no other edits.",
+  "pilot_model": null,
+  "pilot_model_note": "Exact model/checkpoint and sampling parameters are absent from these exports. Do not infer them from the CLI name.",
+  "runs": [
+    {
+      "run": "A1",
+      "condition": "A",
+      "source_conversation_id": "9e7a21a6-8e21-42a6-b914-3ae661a77bac",
+      "source_sha256": "b336a6e0d8a4fadc51286f1260d05ac1ae8b0a5d46446f357bc2b0d5548f5882",
+      "export_sha256": "f096efd86dda07697dc8d655d668e4e30656b25bf447c3dffbdc964189433a0a",
+      "export_file": "A1.jsonl",
+      "records": 8,
+      "path_prefix_replacement_counts": [
+        8,
+        0
+      ]
+    },
+    {
+      "run": "A2",
+      "condition": "A",
+      "source_conversation_id": "d9fbc983-24cc-4b42-a11d-06bdd0589e10",
+      "source_sha256": "b465eb8589e894355097b86664cf44ef85f44e57759176a729b68d0d95128bea",
+      "export_sha256": "8e99216cfb36e1d73276fb922dd33c3040e8d3739c97f91c6f040080a72a9372",
+      "export_file": "A2.jsonl",
+      "records": 2,
+      "path_prefix_replacement_counts": [
+        2,
+        0
+      ]
+    },
+    {
+      "run": "A3",
+      "condition": "A",
+      "source_conversation_id": "342f2dc5-e1ba-4f83-babf-18ba5efd5f25",
+      "source_sha256": "4045dd29b04d81c10b37ce77745815ac2216fa717c9b8c1c649cd2a8e85231e7",
+      "export_sha256": "8478221ca3a3557d341830201ad5980a360249915067f4e87d3c5ad4ff538e62",
+      "export_file": "A3.jsonl",
+      "records": 7,
+      "path_prefix_replacement_counts": [
+        7,
+        0
+      ]
+    },
+    {
+      "run": "A4",
+      "condition": "A",
+      "source_conversation_id": "9f2c846c-a674-4dd8-ae6b-2254e05c2390",
+      "source_sha256": "6d91a21f54843150089696c412b1707e1118f8ec1526e73033a5b7dd2b9a9d6a",
+      "export_sha256": "f2ee018506bafa1c78c4c697a4857074c1f952ee67b2623273ffbb0123f7d1f3",
+      "export_file": "A4.jsonl",
+      "records": 6,
+      "path_prefix_replacement_counts": [
+        5,
+        0
+      ]
+    },
+    {
+      "run": "A5",
+      "condition": "A",
+      "source_conversation_id": "db281a86-3680-48de-bf3f-0098fc4e11d7",
+      "source_sha256": "d2a3c7674997aa5ce928b082fc1711a1edaafa7fac589315639e1295400c6b16",
+      "export_sha256": "71c8cb1fecc1b680531776e444d2586767c7c323f7c07386621c6688cc412d3b",
+      "export_file": "A5.jsonl",
+      "records": 6,
+      "path_prefix_replacement_counts": [
+        6,
+        0
+      ]
+    },
+    {
+      "run": "B1",
+      "condition": "B",
+      "source_conversation_id": "7532e9a5-dc00-4e9a-a8f4-eec75f35379a",
+      "source_sha256": "84d1ad1e867df427d4d87717c5d8ee64c50a0b3c9338d6110ca16008ef1dec28",
+      "export_sha256": "e46193e45b7d0ac3f753b9bac53522fd058f9f61f686b72a751155dc5e7845ce",
+      "export_file": "B1.jsonl",
+      "records": 10,
+      "path_prefix_replacement_counts": [
+        10,
+        0
+      ]
+    },
+    {
+      "run": "B2",
+      "condition": "B",
+      "source_conversation_id": "28a4b69a-3216-4db3-b36e-c8c1d30a9a1d",
+      "source_sha256": "b07badcfa19dfdd99d3250d0e8f131b09183953d71a621968d817f97f2d29e37",
+      "export_sha256": "be8601fcfee11f72556189f5f2900c8d9cb50bbd07a07276375efb2b90e86edb",
+      "export_file": "B2.jsonl",
+      "records": 7,
+      "path_prefix_replacement_counts": [
+        9,
+        0
+      ]
+    },
+    {
+      "run": "B3",
+      "condition": "B",
+      "source_conversation_id": "acb10c4d-740b-46d5-899a-3e6fac0336a6",
+      "source_sha256": "bf713fd2e8e6d437bbc2f89de66797d425a247945054e9906807d329880b58b7",
+      "export_sha256": "bc894d786ddac6ddd3e77cd96033d38360ca1709cfc1e21a90adebb81abaecd7",
+      "export_file": "B3.jsonl",
+      "records": 6,
+      "path_prefix_replacement_counts": [
+        6,
+        0
+      ]
+    },
+    {
+      "run": "B4",
+      "condition": "B",
+      "source_conversation_id": "f3083684-538c-4d36-9066-f0cc52bf6296",
+      "source_sha256": "6ec396bd23ee9c2b1deba6de1fb0571852709bbb5a07bfd4d107d4cafc44595c",
+      "export_sha256": "c7ee70e27bbd124c2b6bec569270dbba07d93bfdc29b59bcda8ad31beb4a602c",
+      "export_file": "B4.jsonl",
+      "records": 8,
+      "path_prefix_replacement_counts": [
+        5,
+        0
+      ]
+    },
+    {
+      "run": "B5",
+      "condition": "B",
+      "source_conversation_id": "7a3b940b-b5b6-4c82-a55d-0891244d3d77",
+      "source_sha256": "0c4a4fc5ad2c757a73b451953ec4658c7dbf0d0b43d98ae983555aefae0f6834",
+      "export_sha256": "e82a122928f73243fef1e92c4e88278d979feb29163e106cea319ccd5180fd77",
+      "export_file": "B5.jsonl",
+      "records": 10,
+      "path_prefix_replacement_counts": [
+        7,
+        0
+      ]
+    },
+    {
+      "run": "C1",
+      "condition": "C",
+      "source_conversation_id": "271f0e56-f423-4959-8305-4619cfb20201",
+      "source_sha256": "d79324e320236eaa8c4b438108dae7530cf7fd503b65ad62a114e7f3ab270df1",
+      "export_sha256": "ed708925b4153fb8db140171610d3d84c36f09e726f3ee9b9ec4cffd419d86b9",
+      "export_file": "C1.jsonl",
+      "records": 8,
+      "path_prefix_replacement_counts": [
+        7,
+        0
+      ]
+    },
+    {
+      "run": "C2",
+      "condition": "C",
+      "source_conversation_id": "c2fc4e64-73cb-4f42-8f81-796c5ffbdf09",
+      "source_sha256": "db1f264b6f5845de82f2716d60886be98f69e2bb491850e3075bd4dd33e2d803",
+      "export_sha256": "59a392ad285ce97d0ebcd56224dba7d5f8557a10fd03058c08ea683cf89fd327",
+      "export_file": "C2.jsonl",
+      "records": 7,
+      "path_prefix_replacement_counts": [
+        6,
+        0
+      ]
+    },
+    {
+      "run": "C3",
+      "condition": "C",
+      "source_conversation_id": "a38f650e-869a-4c5a-8a06-2e94067e27a5",
+      "source_sha256": "908c6cfeaef20e67d9b409cb0c0550326bf35a4de648121b8645c548dce8c120",
+      "export_sha256": "6813bad918b42e08b892359e52360458521836be900b12cb92e9b22cd1bcfd20",
+      "export_file": "C3.jsonl",
+      "records": 8,
+      "path_prefix_replacement_counts": [
+        7,
+        0
+      ]
+    },
+    {
+      "run": "C4",
+      "condition": "C",
+      "source_conversation_id": "78a7a12a-00b4-420a-87b2-3a86463c49fd",
+      "source_sha256": "d983b636010cb34e45cdd8bc78045e6cb2c3a646a213fc7058777863d0f434ae",
+      "export_sha256": "b74e18d664442b54c44e77630eb3e616552c521ef221608f87754fcb076a8edb",
+      "export_file": "C4.jsonl",
+      "records": 6,
+      "path_prefix_replacement_counts": [
+        5,
+        0
+      ]
+    },
+    {
+      "run": "C5",
+      "condition": "C",
+      "source_conversation_id": "6f3d17be-d909-4069-99ab-94be11757bf8",
+      "source_sha256": "4f7f0950baa861e803436778e8b8929962cbb88085c4233b13ce8b8aaa44cd8e",
+      "export_sha256": "24909ec35eeff923177e03321e0e0fea1642cc6d86eccfc984145901dac1f6d1",
+      "export_file": "C5.jsonl",
+      "records": 10,
+      "path_prefix_replacement_counts": [
+        7,
+        0
+      ]
+    }
+  ]
+}
