@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.14"
       - name: Build a fresh curated research snapshot
         run: python scripts/build_public_release.py --output /tmp/audit-the-auditor-ci
       - name: Verify snapshot manifest, trace census, and deterministic results
