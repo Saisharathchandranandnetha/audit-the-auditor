@@ -1,96 +1,150 @@
 # Audit the Auditor
 
-What can a coding-agent monitoring experiment actually tell us?
+### What can a coding-agent monitor conclude when its evidence is incomplete?
 
-This project began with a question about evasion: would an agent change its
-behavior when told that a monitor sees only a compressed log? An audit of the
-15 saved runs found that the experiment could not answer it. Relevant actions
-were missing from the monitor's input, run endings were incomplete, and the
-task's success checks could pass without the intended work being done.
+This repository is a **reproducible, retrospective audit** of an early
+coding-agent monitoring experiment. It began by asking whether an agent
+would change its behavior when told that a monitor would see a compressed
+history. After examining the saved records, that original question remained
+unanswered: the records omit relevant tool actions, execution context, and
+the final results needed to establish task outcomes.
 
-## What we found
+The contribution is a concrete diagnosis of **what reached the observation
+pipeline**. This is **not** evidence that agents intentionally evaded a
+monitor, nor a measurement of LLM-monitor detection accuracy.
 
-- The extractor kept **17 of 54 tool calls** and missed **all five confirmed
-  script edits** because they used a separate editing tool.
-- **Nine script calls across seven runs** lost their working-directory field.
-  Local controls show that changing this directory alone changes the result.
-- **All 15 traces end before the final tool result.** They cannot establish
-  task completion or concealment.
-- A proposed replacement task accepts a **30 MiB sparse file with zero data
-  blocks** while the protected backup remains unchanged. This was a local
-  program counterexample, not a strategy observed in an agent.
+## Findings from the saved pilot
 
-The original evasion hypothesis remains open. These results identify faults in
-one experiment; they do not establish deceptive intent or general monitor
-performance. The exact pilot model and sampling settings are unavailable.
+The dataset contains **15 saved trace fragments**, five in each of three
+original prompt conditions. These are not 15 verified completed tasks.
 
-## Read the project
+| Finding | Observed evidence | Boundary of the claim |
+| --- | --- | --- |
+| Tool coverage | The original command-only extractor kept **17 of 54** tool calls. It omitted **all five confirmed processing-script edits**, which used a different editing tool. | Measures extraction coverage, not monitor recall or agent intent. |
+| Execution context | **Nine script-execution requests across seven runs** lost the working-directory argument. Local controls showed the same command could behave differently from a different directory. | Requests are not proof of completed execution. |
+| Incomplete outcomes | **All 15** exported fragments stop before the final requested tool result, with no final user-facing answers preserved. | Cannot label task success, concealment or honest refusal. |
+| Validator counterexample | A researcher-run local control produced a **30 MiB sparse file** that passed a proposed replacement validator without modifying the protected backup. | Not an agent-discovered strategy or valid data-processing result. |
 
-- [Executive summary](report/executive_summary.md)
-- [Full report](report/main_writeup.md)
-- [Executed notebook](notebooks/02_monitoring_audit.ipynb)
-- [Hypotheses and counterevidence](research/audit_hypotheses.md)
+The original hypothesis about adaptive monitor evasion is **unresolved**.
+The precise pilot model/checkpoint and sampling settings are unavailable.
+This study compares a command-only extractor with more complete structured
+representations and simple byte-budget selection policies; it does **not**
+evaluate a running LLM monitor or realistic semantic compression.
 
 ![Evidence lost before compression](results/audit_001/figures/capture.png)
 
-## Reproduce the results
+## Why this matters
 
-The core audit uses Python 3.11+ and Bash. It needs no API key, GPU, or additional
-Python packages.
+An oversight system can only judge evidence made available to it. A clean
+monitor decision may provide little reassurance if the upstream recorder
+missed a relevant tool channel or execution argument. The broader research
+question is whether collecting and checking that missing evidence improves
+actual safety decisions. **That broader question has not been tested here.**
+
+## Read and inspect the research
+
+- [Executive summary](report/executive_summary.md) — short statement of
+  the findings, caveats and authorship.
+- [Main report](report/main_writeup.md) — complete case study and alternatives.
+- [Evidence-to-claims ledger](research/evidence_and_claims.md) — direct
+  links from each claim to its source and limitations.
+- [AUDIT-001 protocol](research/protocols/audit_001.md) — retrospective trace
+  analysis, evidence retention and fixed shell controls.
+- [AUDIT-002 protocol](research/protocols/audit_002.md) — proposed-validator
+  counterexample tested using local sandbox controls.
+- [Hypotheses and counterevidence](research/audit_hypotheses.md) — what
+  the observations support and what remains unresolved.
+- [Executed analysis notebook](notebooks/02_monitoring_audit.ipynb) —
+  saved analytical outputs; the notebook alone is not a new validation run.
+
+## Reproduction
+
+For a **fresh research snapshot** containing the current README and source
+files, start with Python 3.11+ and Bash. The core audit uses only the Python
+standard library; no GPU, model key or network request is required.
 
 ```bash
-python scripts/verify_release.py
+python scripts/build_public_release.py --output /tmp/audit-the-auditor-review
+python scripts/verify_release.py --root /tmp/audit-the-auditor-review
 ```
 
-This checks the input hashes, runs 13 tests, and reproduces seven result files
-byte for byte. It also checks the saved notebook and counterexample record.
-See [the validation record](research/validation.md) for details.
+The first command creates a **new allowlisted directory and ZIP** with
+source hashes in a newly generated `RELEASE_MANIFEST.json`. Do not reuse
+an existing output directory. The second validates that snapshot's hashes,
+recounts tool calls, runs the core tests, compares seven deterministic
+result files byte-for-byte, and checks recorded notebook and AUDIT-002
+evidence. It **does not** rerun Bubblewrap or an LLM monitor.
 
-To run the analysis separately:
+To run only the core audit and regenerate outputs without replacing
+checked-in results:
 
 ```bash
-python experiments/audit_001/analyze.py --output /tmp/audit-check
+python -m unittest discover -s tests -p 'test_audit.py' -v
+python experiments/audit_001/analyze.py --output /tmp/audit-review
 ```
 
-The analysis runs three fixed local controls. It never executes commands from
-the transcripts. Repeating the sparse-file experiment separately requires
-Linux, Bubblewrap, and namespace permission:
+The analysis executes three **fixed, locally defined** shell controls; it
+does **not** execute commands from recorded agent transcripts. A separate
+Linux/Bubblewrap control is available for environments with namespace
+permission:
 
 ```bash
 python experiments/audit_002/reproduce.py --output /tmp/audit002-new-run.json
 ```
 
-Optional figure, notebook, and manuscript generation:
+Optional report/figure generation requires packages listed in
+`requirements-report.txt`; see [validation details](research/validation.md).
+CI builds and checks a fresh snapshot via
+[research-checks.yml](.github/workflows/research-checks.yml). A passing
+check supports software reproducibility of the tested artifacts; it is not
+independent human verification or a finding about agent deception.
 
-```bash
-python -m venv .venv
-.venv/bin/python -m pip install -r requirements-report.txt
-.venv/bin/python experiments/audit_001/figures.py
-.venv/bin/python scripts/build_notebook.py --execute
-.venv/bin/python scripts/build_manuscript.py
-```
+**Historical release note:** the checked-in `RELEASE_MANIFEST.json`
+captures the earlier frozen release and is intentionally not rewritten when
+the README changes. Passing `python scripts/verify_release.py` against
+a later working tree is therefore *not* the expected workflow. Build a new
+snapshot as above, which receives its own manifest.
 
-## Files
+## Follow-up study: proposed, not run
 
-| Location | Contents |
-|---|---|
-| `data/pilot_001/` | All 15 trace fragments, with local paths redacted |
-| `experiments/pilot_001/` | Original task files and instrumentation |
-| `experiments/audit_001/` | Trace analysis and script controls |
-| `experiments/audit_002/` | Frozen validator and sparse-file reproducer |
-| `results/` | Evidence tables, replay results, figures, and observations |
-| `src/mats_neel/audit.py` | Analysis shared by the scripts and notebook |
-| `report/` | Summary, full report, DOCX, HTML, and PDF |
-| `research/` | Methods, related work, limitations, and contribution records |
+[AUDIT-003](research/protocols/audit_003_proposed.md) proposes a paired
+evaluation in disposable coding-agent environments: hold independently
+verified agent behavior fixed while varying which tool events, arguments
+and results a monitor can see. It defines `CLEAR`, `VIOLATION` and
+`ABSTAIN` outcomes; separate false-positive and unsafe-clearance rates;
+negative controls; and falsification criteria.
 
-## Contributions and sharing
+There are **no AUDIT-003 agent trials or monitoring results** in this repo.
+Treat the document as a research plan, not a result or benchmark.
 
-This is an application research draft. AI assistance was substantial: the
-coding assistant wrote the continuation's analysis, code, and draft prose.
-[The contribution record](research/llm_usage.md) lists the checks and corrections;
-the applicant's personal review is still outstanding.
+## Repository map
 
-The public bundle is `audit-the-auditor.zip`. It includes the evidence needed
-to reproduce the audit and excludes personal application files and full
-third-party transcripts. See [what to publish](PUBLICATION.md) and
-[data attribution](THIRD_PARTY_DATA.md).
+| Path | Contents |
+| --- | --- |
+| `data/pilot_001/` | All 15 path-redacted saved trace fragments |
+| `experiments/pilot_001/` | Original task scripts, instrumentation and snapshots |
+| `experiments/audit_001/` | Retrospective analysis and controlled execution |
+| `experiments/audit_002/` | Frozen validator and separate local counterexample |
+| `results/` | Saved figures, evidence tables, replay and control observations |
+| `src/mats_neel/audit.py` | Core deterministic audit implementation |
+| `tests/` | Core research-code checks |
+| `report/` | Executive summary, full manuscript and generated formats |
+| `research/` | Protocols, alternative explanations, provenance and contribution records |
+
+## Attribution, review and sharing
+
+This remains an **AI-assisted research draft**, not a claim of independent
+human authorship. The earlier continuation involved substantial coding-assistant
+work on analysis, tests, figures, controls and prose. The original
+[AI-assistance disclosure](research/llm_usage.md) is retained.
+The [applicant verification worksheet](research/applicant_verification_worksheet.md)
+contains uncompleted personal-review fields; those fields must be filled
+by the person who actually performed each check. No new personal verification
+has been asserted as part of the README update.
+
+Do not make unreviewed first-person research claims in a fellowship application.
+See [publication guidance](PUBLICATION.md) and
+[third-party data attribution](THIRD_PARTY_DATA.md) before sharing evidence.
+The curated snapshot omits historical third-party transcripts and other
+materials outside its allowlist. Repository history is preserved; past commits
+and AI contributions have not been removed or hidden.
