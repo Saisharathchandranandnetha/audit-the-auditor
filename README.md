@@ -33,6 +33,27 @@ performance. The exact pilot model and sampling settings are unavailable.
 
 ![Evidence lost before compression](results/audit_001/figures/capture.png)
 
+## Research review and next experiment
+
+This repository is a retrospective **evidence-capture audit**, not a completed
+evaluation of an LLM monitor. For an explicit statement-to-evidence map, see
+[Evidence and claims](research/evidence_and_claims.md).
+
+The follow-up [AUDIT-003 monitoring protocol](research/protocols/audit_003_proposed.md)
+is **proposed only**. It has no new agent trials, monitor outcomes, or
+validated results. It is designed to test whether controlled evidence loss
+changes monitor decisions on independently verified task-policy violations,
+including negative controls and outcomes that could disconfirm the hypothesis.
+
+The [applicant verification worksheet](research/applicant_verification_worksheet.md)
+distinguishes automated checks from personal review and documented authorship.
+The existing [AI assistance record](research/llm_usage.md) remains unchanged.
+
+Automated core verification is defined in
+[research-checks.yml](.github/workflows/research-checks.yml). A passing workflow
+supports deterministic reproduction of the listed checks, not human
+verification, task completion or deceptive-agent conclusions.
+
 ## Reproduce the results
 
 The core audit uses Python 3.11+ and Bash. It needs no API key, GPU, or additional
