@@ -19,6 +19,8 @@ FILES = [
     "research/README.md", "research/audit_hypotheses.md", "research/llm_usage.md",
     "research/related_work_verified.md", "research/continuation_time.md",
     "research/validation.md", "research/publication_manifest_notes.md",
+    "research/evidence_and_claims.md", "research/applicant_verification_worksheet.md",
+    "research/protocols/audit_003_proposed.md",
     "research/protocols/audit_001.md", "research/protocols/audit_002.md",
     "scripts/export_pilot.py", "scripts/build_notebook.py", "scripts/build_manuscript.py",
     "scripts/build_public_release.py", "scripts/verify_release.py",
