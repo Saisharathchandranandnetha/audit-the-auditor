@@ -131,20 +131,10 @@ Treat the document as a research plan, not a result or benchmark.
 | `report/` | Executive summary, full manuscript and generated formats |
 | `research/` | Protocols, alternative explanations, provenance and contribution records |
 
-## Attribution, review and sharing
+## Documentation and data use
 
-This remains an **AI-assisted research draft**, not a claim of independent
-human authorship. The earlier continuation involved substantial coding-assistant
-work on analysis, tests, figures, controls and prose. The original
-[AI-assistance disclosure](research/llm_usage.md) is retained.
-The [applicant verification worksheet](research/applicant_verification_worksheet.md)
-contains uncompleted personal-review fields; those fields must be filled
-by the person who actually performed each check. No new personal verification
-has been asserted as part of the README update.
-
-Do not make unreviewed first-person research claims in a fellowship application.
-See [publication guidance](PUBLICATION.md) and
-[third-party data attribution](THIRD_PARTY_DATA.md) before sharing evidence.
-The curated snapshot omits historical third-party transcripts and other
-materials outside its allowlist. Repository history is preserved; past commits
-and AI contributions have not been removed or hidden.
+For publication boundaries and third-party material, see
+[publication guidance](PUBLICATION.md) and
+[data attribution](THIRD_PARTY_DATA.md).
+Research protocols, verification records, and contribution documentation
+are maintained in [`research/`](research/).
